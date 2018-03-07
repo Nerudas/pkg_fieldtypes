@@ -8,5 +8,6 @@ Field Types Package is a project internal to Nerudas. We use it as extension on 
 
 Thank you for your understanding.
 
-## System - Field Types Plugin
+## Package Contents
+### System - Field Types Plugin
 Add additional field types for jform using the onContentPrepareForm trigger

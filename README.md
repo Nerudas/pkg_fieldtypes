@@ -11,3 +11,6 @@ Thank you for your understanding.
 ## Package Contents
 ### System - Field Types Plugin
 Add additional field types for jform using the onContentPrepareForm trigger
+
+### Field Types - Advanced Tags Plugin
+Add Advanced Tags field type

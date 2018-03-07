@@ -1,0 +1,74 @@
+/*
+ * @package    Field Types - Advanced Tags Plugin
+ * @version    1.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+/* Blocks
+ ========================================================================== */
+[data-input-advtags="blocks"] ul {
+	list-style: none;
+}
+
+[data-input-advtags="blocks"] ul.level-1 {
+	margin: 0;
+}
+
+[data-input-advtags="blocks"] ul.level-1::before, [data-input-advtags="blocks"] ul.level-1::after {
+	display: table;
+	content: '';
+	line-height: 0;
+}
+
+[data-input-advtags="blocks"] ul.level-1::after {
+	clear: both;
+}
+
+[data-input-advtags="blocks"] li.level-1 {
+	display: inline-block;
+	width: 280px;
+	padding: 10px;
+	margin: 10px;
+	vertical-align: top;
+	border: 1px solid #e5e5e5;
+	box-sizing: border-box;
+}
+
+[data-input-advtags="blocks"] li.level-1 > label {
+	display: block;
+	position: relative;
+	margin: 0 0 10px;
+	padding: 0 0 10px;
+	font-size: 18px;
+	line-height: 20px;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+
+}
+
+[data-input-advtags="blocks"] li.level-1 > label > input {
+	margin-left: 0;
+	position: absolute;
+	right: 0;
+}
+
+[data-input-advtags="blocks"] ul.level-2 {
+	margin: 0;
+}
+
+/* Simple
+ ========================================================================== */
+[data-input-advtags="simple"] ul {
+	list-style: none;
+}
+
+[data-input-advtags="simple"] ul.level-1 {
+	margin: 0;
+}
+
+[data-input-advtags="simple"] li.level-1 > label {
+	font-weight: bold;
+}

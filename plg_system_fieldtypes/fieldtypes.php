@@ -22,7 +22,7 @@ class PlgSystemFieldTypes extends CMSPlugin
 	/**
 	 * Adds additional languages files
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	public function onAfterInitialise()
 	{
@@ -38,12 +38,12 @@ class PlgSystemFieldTypes extends CMSPlugin
 	/**
 	 * Adds additional fields & rules to From
 	 *
-	 * @param   Form $form The form to be altered.
+	 * @param   Form  $form The form to be altered.
 	 * @param   mixed $data The associated data for the form.
 	 *
 	 * @return  boolean
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	public function onContentPrepareForm($form, $data)
 	{

@@ -23,3 +23,6 @@ Add Image filed with ajax upload
 
 * **Field Types - Map Plugin**  
 Add Map filed with ajax upload
+
+* **Field Types - Phones Plugin**  
+Add Multiple phone field type

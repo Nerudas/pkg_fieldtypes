@@ -26,3 +26,6 @@ Add Map filed with ajax upload
 
 * **Field Types - Phones Plugin**  
 Add Multiple phone field type
+
+* **Field Types - Price Plugin**  
+Add Price field type

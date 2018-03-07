@@ -21,6 +21,7 @@
 		<folder type="plugin" id="ajaximage" group="fieldtypes">plg_fieldtypes_ajaximage</folder>
 		<folder type="plugin" id="map" group="fieldtypes">plg_fieldtypes_map</folder>
 		<folder type="plugin" id="phones" group="fieldtypes">plg_fieldtypes_phones</folder>
+		<folder type="plugin" id="price" group="fieldtypes">plg_fieldtypes_price</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="PKG_FIELDTYPES">

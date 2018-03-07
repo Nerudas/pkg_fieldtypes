@@ -14,3 +14,6 @@ Add additional field types for jform using the onContentPrepareForm trigger
 
 ### Field Types - Advanced Tags Plugin
 Add Advanced Tags field type
+
+### Field Types - Ajax Alias Plugin
+Add Alias field with Ajax check

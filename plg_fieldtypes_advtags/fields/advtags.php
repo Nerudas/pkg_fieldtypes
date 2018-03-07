@@ -94,6 +94,7 @@ class JFormFieldAdvTags extends FormField
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JFormField::setup()
+	 *
 	 * @since  1.0.0
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
@@ -145,7 +146,6 @@ class JFormFieldAdvTags extends FormField
 	 * @return  array
 	 *
 	 * @since  1.0.0
-	 * @throws Exception
 	 */
 	protected function getLayoutData()
 	{
@@ -229,7 +229,7 @@ class JFormFieldAdvTags extends FormField
 				->from($db->quoteName('#__tags'))
 				->where($db->quoteName('alias') . ' <> ' . $db->quote('root'));
 
-			// Aublished and Access
+			// Published and Access
 			if ($app->isSite())
 			{
 				$query->where($db->quoteName('published') . ' = ' . 1)

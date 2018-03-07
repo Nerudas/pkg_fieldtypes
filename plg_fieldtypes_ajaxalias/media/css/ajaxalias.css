@@ -1,0 +1,19 @@
+/*
+ * @package    Field Types - Ajax Alias Plugin
+ * @version    1.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+[data-input-ajaxalias] .icon-loop {
+	animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}

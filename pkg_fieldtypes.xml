@@ -23,6 +23,7 @@
 		<folder type="plugin" id="phones" group="fieldtypes">plg_fieldtypes_phones</folder>
 		<folder type="plugin" id="price" group="fieldtypes">plg_fieldtypes_price</folder>
 		<folder type="plugin" id="regions" group="fieldtypes">plg_fieldtypes_regions</folder>
+		<folder type="plugin" id="social" group="fieldtypes">plg_fieldtypes_social</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="PKG_FIELDTYPES">

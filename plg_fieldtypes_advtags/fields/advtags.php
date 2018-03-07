@@ -312,7 +312,7 @@ class JFormFieldAdvTags extends FormField
 			->join('INNER', '#__tags as this ON t.lft > this.lft AND t.rgt < this.rgt')
 			->where('this.id IN (' . $this->parents . ')');
 
-		// Published and Access
+		// ublished and Access
 		if ($app->isSite())
 		{
 			$query->where($db->quoteName('t.published') . ' = ' . 1)

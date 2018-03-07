@@ -15,7 +15,7 @@
 		<language tag="ru-RU">ru-RU/ru-RU.pkg_fieldtypes.sys.ini</language>
 	</languages>
 	<files>
-
+		<folder type="plugin" id="fieldtypes" group="system">plg_system_fieldtypes</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="PKG_FIELDTYPES">

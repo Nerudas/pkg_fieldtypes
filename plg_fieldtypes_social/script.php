@@ -1,16 +1,16 @@
 <?php
 /**
- * @package    Field Types - Regions Plugin
+ * @package    Field Types - Social Plugin
  * @version    1.0.0
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
 
 defined('_JEXEC') or die;
 
-class PlgFieldTypesRegionsInstallerScript
+class PlgFieldTypesSocialInstallerScript
 {
 	/**
 	 * Runs right after any installation action is preformed on the component.
@@ -27,13 +27,11 @@ class PlgFieldTypesRegionsInstallerScript
 	 */
 	function postflight($type, $parent)
 	{
-		$plugin  = JPATH_PLUGINS . '/fieldtypes/regions/layouts';
-		$layouts = JPATH_ROOT . '/layouts/joomla/form/field/regions';
-		if (JFolder::exists($layouts))
-		{
-			JFolder::delete($layouts);
-		}
-		JFolder::move($plugin, $layouts);
+		$file    = '/social.php';
+		$plugin  = JPATH_PLUGINS . '/fieldtypes/social/layouts';
+		$layouts = JPATH_ROOT . '/layouts/joomla/form/field';
+		JFile::copy($plugin . $file, $layouts . $file);
+		JFolder::delete($plugin);
 
 		return true;
 	}
@@ -45,8 +43,8 @@ class PlgFieldTypesRegionsInstallerScript
 	 *
 	 * @since  1.0.0
 	 */
-	public function uninstall(JAdapterInstance $adapter)
+	public function uninstall($adapter)
 	{
-		JFile::delete(JPATH_ROOT . '/layouts/joomla/form/field/regions.php');
+		JFile::delete(JPATH_ROOT . '/layouts/joomla/form/field/social.php');
 	}
 }

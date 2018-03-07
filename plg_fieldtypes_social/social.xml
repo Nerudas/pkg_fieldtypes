@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="plugin" group="fieldtypes" method="upgrade">
+	<name>PLG_FIELDTYPES_SOCIAL</name>
+	<author>Nerudas</author>
+	<creationDate>March 2018</creationDate>
+	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>support@nerudas.ru</authorEmail>
+	<authorUrl>nerudas.ru</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_FIELDTYPES_SOCIAL_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_fieldtypes_social.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_fieldtypes_social.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_fieldtypes_social.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_fieldtypes_social.sys.ini</language>
+	</languages>
+	<files>
+		<filename plugin="social">social.php</filename>
+		<folder>fields</folder>
+		<folder>layouts</folder>
+	</files>
+	<media destination="plg_fieldtypes_social" folder="media">
+		<filename>field.css</filename>
+		<filename>field.js</filename>
+		<filename>field.min.css</filename>
+		<filename>field.min.js</filename>
+	</media>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			</fieldset>
+		</fields>
+	</config>
+	<updateservers>
+		<server type="extension" priority="1" name="Field Types - Social Plugin">
+			https://update.nerudas.ru?extension=plg_fieldtypes_social
+		</server>
+	</updateservers>
+</extension>

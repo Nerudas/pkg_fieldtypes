@@ -9,17 +9,17 @@ Field Types Package is a project internal to Nerudas. We use it as extension on 
 Thank you for your understanding.
 
 ## Package Contents
-### System - Field Types Plugin
+* System - Field Types Plugin  
 Add additional field types for jform using the onContentPrepareForm trigger
 
-### Field Types - Advanced Tags Plugin
+* Field Types - Advanced Tags Plugin  
 Add Advanced Tags field type
 
-### Field Types - Ajax Alias Plugin
+* Field Types - Ajax Alias Plugin  
 Add Alias field with Ajax check
 
-### Field Types - Ajax Image Plugin
+* Field Types - Ajax Image Plugin  
 Add Image filed with ajax upload
 
-### Field Types - Map Plugin
+* Field Types - Map Plugin  
 Add Map filed with ajax upload

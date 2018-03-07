@@ -56,7 +56,7 @@ class JFormFieldMap extends FormField
 	 *
 	 * @see     JFormField::setup()
 	 *
-	 * @since  1.0.0
+	 * @since   1.0.0
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
 	{
@@ -121,10 +121,10 @@ class JFormFieldMap extends FormField
 
 		$region = $this->getRegionData();
 
-		$params['latitude']  = ($region) ? $region->latitude : 60.58949999;
-		$params['longitude'] = ($region) ? $region->longitude : 88.167;
-		$params['center']    = array($params['latitude'], $params['longitude']);
-		$params['zoom']      = ($region) ? $region->zoom : 6;
+		$params['latitude']     = ($region) ? $region->latitude : 60.58949999;
+		$params['longitude']    = ($region) ? $region->longitude : 88.167;
+		$params['center']       = array($params['latitude'], $params['longitude']);
+		$params['zoom']         = ($region) ? $region->zoom : 6;
 		$params['placemarkurl'] = (!empty($this->placemarkurl)) ? $this->placemarkurl : '';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);

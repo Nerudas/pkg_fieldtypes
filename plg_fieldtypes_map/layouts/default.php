@@ -29,7 +29,8 @@ HTMLHelper::_('script', 'media/plg_fieldtypes_map/js/default.min.js', array('ver
 			   type="hidden" value='<?php echo $value['placemark']['coordinates']; ?>'>
 		<input id="<?php echo $id; ?>_placemark_latitude" name="<?php echo $name; ?>[placemark][latitude]" type="hidden"
 			   value='<?php echo $value['placemark']['latitude']; ?>'>
-		<input id="<?php echo $id; ?>_placemark_longitude" name="<?php echo $name; ?>[placemark][longitude]" type="hidden"
+		<input id="<?php echo $id; ?>_placemark_longitude" name="<?php echo $name; ?>[placemark][longitude]"
+			   type="hidden"
 			   value='<?php echo $value['placemark']['longitude']; ?>'>
 	</div>
 	<div class="params">

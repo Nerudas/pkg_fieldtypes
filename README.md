@@ -20,3 +20,6 @@ Add Alias field with Ajax check
 
 ### Field Types - Ajax Image Plugin
 Add Image filed with ajax upload
+
+### Field Types - Map Plugin
+Add Map filed with ajax upload

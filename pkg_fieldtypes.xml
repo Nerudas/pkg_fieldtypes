@@ -19,6 +19,7 @@
 		<folder type="plugin" id="advtags" group="fieldtypes">plg_fieldtypes_advtags</folder>
 		<folder type="plugin" id="ajaxalias" group="fieldtypes">plg_fieldtypes_ajaxalias</folder>
 		<folder type="plugin" id="ajaximage" group="fieldtypes">plg_fieldtypes_ajaximage</folder>
+		<folder type="plugin" id="map" group="fieldtypes">plg_fieldtypes_map</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="PKG_FIELDTYPES">

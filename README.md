@@ -1,5 +1,5 @@
 # Field Types Package
-A package of field types added to the JFROM using the onContentPrepareForm trigger
+Extensions package for field types added to the JFrom using the onContentPrepareForm trigger
 
 **Supported Joomla versions:** 3.8.0 or later  
 

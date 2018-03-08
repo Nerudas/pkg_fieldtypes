@@ -15,7 +15,6 @@
 		<language tag="ru-RU">ru-RU/ru-RU.pkg_fieldtypes.sys.ini</language>
 	</languages>
 	<files>
-		<folder type="plugin" id="fieldtypes" group="system">plg_system_fieldtypes</folder>
 		<folder type="plugin" id="advtags" group="fieldtypes">plg_fieldtypes_advtags</folder>
 		<folder type="plugin" id="ajaxalias" group="fieldtypes">plg_fieldtypes_ajaxalias</folder>
 		<folder type="plugin" id="ajaximage" group="fieldtypes">plg_fieldtypes_ajaximage</folder>
@@ -24,6 +23,7 @@
 		<folder type="plugin" id="price" group="fieldtypes">plg_fieldtypes_price</folder>
 		<folder type="plugin" id="regions" group="fieldtypes">plg_fieldtypes_regions</folder>
 		<folder type="plugin" id="social" group="fieldtypes">plg_fieldtypes_social</folder>
+		<folder type="plugin" id="fieldtypes" group="system">plg_system_fieldtypes</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="PKG_FIELDTYPES">

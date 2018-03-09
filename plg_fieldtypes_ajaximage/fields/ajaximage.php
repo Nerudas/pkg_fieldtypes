@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    Field Type - Ajax Image Plugin
+ * @package    Field Types - Ajax Image Plugin
  * @version    1.0.0
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.

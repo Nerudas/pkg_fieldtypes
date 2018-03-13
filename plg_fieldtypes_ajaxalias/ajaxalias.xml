@@ -31,9 +31,4 @@
 		<folder>js</folder>
 		<folder>css</folder>
 	</media>
-	<updateservers>
-		<server type="extension" priority="1" name="Field Types - AJAX Alias Plugin">
-			https://update.nerudas.ru?extension=plg_fieldtypes_ajaxalias
-		</server>
-	</updateservers>
 </extension>

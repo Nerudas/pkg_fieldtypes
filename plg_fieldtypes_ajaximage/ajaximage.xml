@@ -32,9 +32,4 @@
 			</fieldset>
 		</fields>
 	</config>
-	<updateservers>
-		<server type="extension" priority="1" name="Field Types - Ajax Image Plugin">
-			https://update.nerudas.ru?extension=plg_fieldtypes_ajaximage
-		</server>
-	</updateservers>
 </extension>

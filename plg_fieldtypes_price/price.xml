@@ -33,9 +33,4 @@
 			</fieldset>
 		</fields>
 	</config>
-	<updateservers>
-		<server type="extension" priority="1" name="Field Types - Price Plugin">
-			https://update.nerudas.ru?extension=plg_fieldtypes_price
-		</server>
-	</updateservers>
 </extension>

@@ -32,9 +32,4 @@
 			</fieldset>
 		</fields>
 	</config>
-	<updateservers>
-		<server type="extension" priority="1" name="Field Types - Map Plugin">
-			https://update.nerudas.ru?extension=plg_fieldtypes_map
-		</server>
-	</updateservers>
 </extension>

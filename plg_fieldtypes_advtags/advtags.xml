@@ -33,9 +33,4 @@
 			</fieldset>
 		</fields>
 	</config>
-	<updateservers>
-		<server type="extension" priority="1" name="Field Types - Advanced Tags Plugin">
-			https://update.nerudas.ru?extension=plg_fieldtypes_advtags
-		</server>
-	</updateservers>
 </extension>

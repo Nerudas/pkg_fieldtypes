@@ -180,9 +180,12 @@ class imageFolderHelper
 					$old          = JPATH_ROOT . '/' . $image['src'];
 					$image['src'] = str_replace($folder, $update, $image['src']);
 					$new          = JPATH_ROOT . '/' . $image['src'];
+
+					$this->checkFolder(pathinfo($image['src'])['dirname']);
 					JFile::move($old, $new);
 				}
 			}
+
 			if (count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
 			{
 				JFolder::delete(JPATH_ROOT . '/' . $folder);

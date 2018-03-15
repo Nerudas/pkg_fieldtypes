@@ -419,6 +419,9 @@
 					url: saveurl,
 					data: ajaxData,
 					success: function (response) {
+						if (multiple) {
+							checkLimit();
+						}
 					}
 
 				});

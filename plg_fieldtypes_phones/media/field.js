@@ -11,11 +11,11 @@
 	$(document).ready(function () {
 		$('[data-input-phones]').each(function () {
 			// Elements
-			var field = $(this),
+			var field = $(input),
 				id = field.attr('id'),
 				blank = field.find('.item[data-key="phone_X"]'),
 				result = field.find('#' + id + '_result'),
-				form = field.parents('form');
+				form = field.closest('form');
 
 			// Fix selector
 			if (!field.selector) {
@@ -34,7 +34,7 @@
 
 			// Remove phone
 			$('body').on('click', field.selector + ' .actions .remove', function () {
-				$(this).parents('.item').remove();
+				$(input).closest('.item').remove();
 				if (result.find('.item').length == 0) {
 					addPhone();
 				}
@@ -56,29 +56,34 @@
 
 			// Number keyup
 			$('body').on('keyup', '#' + id + ' [name*="number"]', function () {
-				var value = $(this).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
-				$(this).val(value);
-				var code = $(this).parents('.item').find('[name*="code"]').val();
-				var phone = $(this).parents('.item').find('[name*="display"]');
+				var value = $(input).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
+				$(input).val(value);
+				var code = $(input).closest('.item').find('[name*="code"]').val();
+				var phone = $(input).closest('.item').find('[name*="display"]');
 				$(phone).val(code + value);
 			});
 
 			// Number change
 			$('body').on('change', '#' + id + ' [name*="number"]', function () {
-				var value = $(this).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
-				$(this).val(value);
-				var code = $(this).parents('.item').find('[name*="code"]').val();
-				var phone = $(this).parents('.item').find('[name*="display"]');
+				var value = $(input).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
+				$(input).val(value);
+				var code = $(input).closest('.item').find('[name*="code"]').val();
+				var phone = $(input).closest('.item').find('[name*="display"]');
 				$(phone).val(code + value);
 			});
 
-			// Remove empty phones
+			// Remove empty phones and check number
 			$(form).on('submit', function () {
 				result.find('[name*="number"]').each(function (i, input) {
 					if ($(input).val() == '') {
-						$(input).parents('.item').remove();
+						$(input).closest('.item').remove();
 						reIndex();
 					}
+					var value = $(input).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
+					$(input).val(value);
+					var code = $(input).closest('.item').find('[name*="code"]').val();
+					var phone = $(input).closest('.item').find('[name*="display"]');
+					$(phone).val(code + value);
 				});
 			});
 

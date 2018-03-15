@@ -55,7 +55,16 @@
 			});
 
 			// Number keyup
-			$('body').on('keyup', '[name*="number"]', function () {
+			$('body').on('keyup', '#' + id + ' [name*="number"]', function () {
+				var value = $(this).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
+				$(this).val(value);
+				var code = $(this).parents('.item').find('[name*="code"]').val();
+				var phone = $(this).parents('.item').find('[name*="display"]');
+				$(phone).val(code + value);
+			});
+
+			// Number change
+			$('body').on('change', '#' + id + ' [name*="number"]', function () {
 				var value = $(this).val().replace(/[^.\d]+/g, '').replace(/^([^.]*\.)|\./g, '$1');
 				$(this).val(value);
 				var code = $(this).parents('.item').find('[name*="code"]').val();

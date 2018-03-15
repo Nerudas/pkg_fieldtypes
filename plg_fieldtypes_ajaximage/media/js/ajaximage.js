@@ -109,6 +109,13 @@
 				// Check on page load
 				checkLimit();
 
+				// Save text
+				if (text) {
+					$('body').on('change', result.selector + ' .item [name*="[text]"]', function () {
+						saveField();
+					});
+				}
+
 				// Multiple remove
 				$('body').on('click', result.selector + ' .item .actions .remove', function () {
 					form.addClass('disable');

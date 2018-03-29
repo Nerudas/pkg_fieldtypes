@@ -153,17 +153,12 @@ class imageFolderHelper
 			return false;
 		}
 
-		if (empty($value))
-		{
-			return $this->saveImagesValue($pk, $table, $column, $value);
-		}
-
 		if (empty($folder))
 		{
 			$folder = $this->getItemImageFolder($pk);
 		}
-
 		$update = (preg_match('/tmp_/', $folder)) ? $this->getItemImageFolder($pk) : false;
+
 		if ($update)
 		{
 			if (is_string($value))
@@ -185,11 +180,10 @@ class imageFolderHelper
 					JFile::move($old, $new);
 				}
 			}
-
-			if (count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
-			{
-				JFolder::delete(JPATH_ROOT . '/' . $folder);
-			}
+		}
+		if ($update && count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
+		{
+			JFolder::delete(JPATH_ROOT . '/' . $folder);
 		}
 
 		return $this->saveImagesValue($pk, $table, $column, $value);

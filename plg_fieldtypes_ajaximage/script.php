@@ -38,20 +38,6 @@ class PlgFieldTypesAjaxImageInstallerScript
 	}
 
 	/**
-	 * This method is called after a component is updated.
-	 *
-	 * @param  \stdClass $parent - Parent object calling object.
-	 *
-	 * @return void
-	 *
-	 * @since  1.0.0
-	 */
-	public function update($parent)
-	{
-		JFolder::delete(JPATH_ROOT . '/media/plg_fieldtypes_ajaximage');
-	}
-
-	/**
 	 * Called on uninstallation
 	 *
 	 * @param   JAdapterInstance $adapter The object responsible for running this script

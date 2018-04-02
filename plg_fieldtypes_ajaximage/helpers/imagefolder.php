@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Field Types - Ajax Image Plugin
- * @version    1.0.1
+ * @version    1.0.2
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -181,6 +181,7 @@ class imageFolderHelper
 				}
 			}
 		}
+
 		if ($update && count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
 		{
 			JFolder::delete(JPATH_ROOT . '/' . $folder);

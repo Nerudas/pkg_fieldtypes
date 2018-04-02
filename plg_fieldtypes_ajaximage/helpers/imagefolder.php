@@ -182,7 +182,8 @@ class imageFolderHelper
 			}
 		}
 
-		if ($update && count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
+		if ($update && JFolder::exists(JPATH_ROOT . '/' . $folder) &&
+			count(JFolder::files(JPATH_ROOT . '/' . $folder, '', true, true, array('index.html'))) == 0)
 		{
 			JFolder::delete(JPATH_ROOT . '/' . $folder);
 		}

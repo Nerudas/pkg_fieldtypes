@@ -30,9 +30,11 @@ extract($displayData);
 	<?php foreach ($options as $option): ?>
 		<li class="item option-<?php echo $option->key; ?> level-<?php echo $option->level; ?> ">
 			<label for="<?php echo $option->id; ?>" class="checkbox">
-				<input type="checkbox" name="<?php echo $option->name; ?>" id="<?php echo $option->id; ?>"
-					   value="<?php echo $option->value; ?>"
-					   data-parent="<?php echo $option->parent; ?>" <?php echo $option->checked; ?>>
+				<?php if (!$option->only_title): ?>
+					<input type="checkbox" name="<?php echo $option->name; ?>" id="<?php echo $option->id; ?>"
+						   value="<?php echo $option->value; ?>"
+						   data-parent="<?php echo $option->parent; ?>" <?php echo $option->checked; ?>>
+				<?php endif; ?>
 				<?php echo $option->text; ?>
 			</label>
 			<?php if (!empty($children[$option->key]))

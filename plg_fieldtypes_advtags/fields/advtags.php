@@ -58,6 +58,14 @@ class JFormFieldAdvTags extends FormField
 	protected $show_null = false;
 
 	/**
+	 * Root items whiteout checkbox title
+	 *
+	 * @var   boolean
+	 * @since  1.0.0
+	 */
+	protected $root_titles = false;
+
+	/**
 	 * Options array
 	 *
 	 * @var   array
@@ -81,7 +89,6 @@ class JFormFieldAdvTags extends FormField
 	 */
 	protected $_children = null;
 
-
 	/**
 	 * Method to attach a JForm object to the field.
 	 *
@@ -102,10 +109,11 @@ class JFormFieldAdvTags extends FormField
 		$return = parent::setup($element, $value, $group);
 		if ($return)
 		{
-			$this->parents   = (!empty($this->element['parents'])) ? (string) $this->element['parents'] : '';
-			$this->ids       = (!empty($this->element['ids'])) ? (string) $this->element['ids'] : '';
-			$this->show_null = (!empty($this->element['show_null']) && (string) $this->element['show_null'] == 'true');
-			$this->layout    = (!empty($this->element['layout'])) ? (string) $this->element['layout'] : $this->layout;
+			$this->parents     = (!empty($this->element['parents'])) ? (string) $this->element['parents'] : '';
+			$this->ids         = (!empty($this->element['ids'])) ? (string) $this->element['ids'] : '';
+			$this->show_null   = (!empty($this->element['show_null']) && (string) $this->element['show_null'] == 'true');
+			$this->root_titles = (!empty($this->element['root_titles']) && (string) $this->element['root_titles'] == 'true');
+			$this->layout      = (!empty($this->element['layout'])) ? (string) $this->element['layout'] : $this->layout;
 		}
 
 		$value = $this->value;
@@ -236,6 +244,7 @@ class JFormFieldAdvTags extends FormField
 					->where('access IN (' . implode(',', Factory::getUser()->getAuthorisedViewLevels()) . ')');
 			}
 
+			$only_title = array();
 			// Parents
 			if (!empty($this->parents))
 			{
@@ -245,7 +254,10 @@ class JFormFieldAdvTags extends FormField
 			// Ids
 			elseif (!empty($this->ids))
 			{
-				$query->where($db->quoteName('id') . ' IN (' . $this->ids . ')');
+				$include    = $this->getTagsInclude();
+				$ids        = implode(',', $include->ids);
+				$only_title = array_unique(array_merge($only_title, $include->only_title));
+				$query->where($db->quoteName('id') . ' IN (' . $ids . ')');
 			}
 
 			$query->order('lft ASC');
@@ -268,14 +280,16 @@ class JFormFieldAdvTags extends FormField
 
 			foreach ($options as &$option)
 			{
-				$option->images   = new Registry($option->images);
-				$option->text     = $option->title;
-				$option->key      = $option->id;
-				$option->id       = $this->id . '_' . $option->id;
-				$option->value    = $option->key;
-				$option->name     = $this->name;
-				$option->parent   = $option->parent_id;
-				$option->treename = str_repeat('- ', ($option->level - 1)) . $option->text;
+				$option->images     = new Registry($option->images);
+				$option->text       = $option->title;
+				$option->key        = $option->id;
+				$option->id         = $this->id . '_' . $option->id;
+				$option->value      = $option->key;
+				$option->name       = $this->name;
+				$option->parent     = $option->parent_id;
+				$option->only_title = (in_array($option->key, $only_title) ||
+					($this->root_titles && $option->level == 1 && !empty($option->key)));
+				$option->treename   = str_repeat('- ', ($option->level - 1)) . $option->text;
 				if ($this->multiple)
 				{
 					$option->checked  = (in_array($option->value, $this->value)) ? 'checked' : '';
@@ -296,7 +310,50 @@ class JFormFieldAdvTags extends FormField
 	}
 
 	/**
-	 * Method to get options array
+	 * Method to get tags
+	 *
+	 * @param array $pks tags ids
+	 *
+	 * @return object   * ids         all ids array
+	 *                 * only_title  id tags to show without checkbox
+	 *
+	 * @since  1.0.0
+	 */
+	protected function getTagsInclude($pks = null)
+	{
+		$result             = new stdClass();
+		$result->ids        = array();
+		$result->only_title = array();
+
+		$pks = (!empty($pks)) ? $pks : $this->ids;
+		if (!empty($pks))
+		{
+			$ids   = (!is_array($pks)) ? explode(',', $pks) : $pks;
+			$db    = Factory::getDbo();
+			$query = $db->getQuery(true)
+				->select(array('id', 'parent_id', 'level'))
+				->from($db->quoteName('#__tags'))
+				->where($db->quoteName('alias') . ' <> ' . $db->quote('root'))
+				->where($db->quoteName('id') . ' IN (' . implode(',', $ids) . ')');
+			$db->setQuery($query);
+			$tags = $db->loadObjectList('id');
+
+			foreach ($tags as $id => $tag)
+			{
+				$result->ids[] = $id;
+				if ($tag->parent_id != 1 && !isset($tags[$tag->parent_id]) && !in_array($tag->parent_id, $result->ids))
+				{
+					$result->ids[]        = $tag->parent_id;
+					$result->only_title[] = $tag->parent_id;
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Method to get tags tree array
 	 *
 	 * @return  array.
 	 *

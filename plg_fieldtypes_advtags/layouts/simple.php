@@ -10,7 +10,6 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 
@@ -28,12 +27,8 @@ extract($displayData);
  * @var   string $class    Classes for the input.
  */
 
-HTMLHelper::_('jquery.framework');
 HTMLHelper::_('stylesheet', 'media/plg_fieldtypes_advtags/field.min.css', array('version' => 'auto'));
-if (Factory::getApplication()->isSite())
-{
-	HTMLHelper::_('script', 'media/plg_fieldtypes_advtags/field.min.js', array('version' => 'auto'));
-}
+
 ?>
 <div id="<?php echo $id; ?>" data-input-advtags="simple" class="<?php echo $class; ?>">
 	<?php $data      = $displayData;

@@ -23,9 +23,7 @@
 	</files>
 	<media destination="plg_fieldtypes_advtags" folder="media">
 		<filename>field.css</filename>
-		<filename>field.js</filename>
 		<filename>field.min.css</filename>
-		<filename>field.min.js</filename>
 	</media>
 	<config>
 		<fields name="params">

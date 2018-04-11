@@ -50,4 +50,26 @@ class PlgFieldTypesAdvTagsInstallerScript
 	{
 		JFile::delete(JPATH_ROOT . '/layouts/joomla/form/field/advtags.php');
 	}
+
+	/**
+	 * This method is called after a component is updated.
+	 *
+	 * @param  \stdClass $parent - Parent object calling object.
+	 *
+	 * @return void
+	 *
+	 * @since  1.0.4
+	 */
+	public function update($parent)
+	{
+		$path = JPATH_ROOT . '/media/plg_fieldtypes_advtags/';
+		if (JFile::exists($path . 'field.js'))
+		{
+			JFile::delete($path . 'field.js');
+		}
+		if (JFile::exists($path . 'field.min.js'))
+		{
+			JFile::delete($path . 'field.min.js');
+		}
+	}
 }

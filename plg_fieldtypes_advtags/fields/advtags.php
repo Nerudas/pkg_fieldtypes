@@ -334,7 +334,9 @@ class JFormFieldAdvTags extends FormField
 				->select(array('id', 'parent_id', 'level'))
 				->from($db->quoteName('#__tags'))
 				->where($db->quoteName('alias') . ' <> ' . $db->quote('root'))
-				->where($db->quoteName('id') . ' IN (' . implode(',', $ids) . ')');
+				->where('(' . $db->quoteName('id') . ' IN (' . implode(',', $ids) . ') OR '
+					. '(' . $db->quoteName('level') . ' = ' . $db->quote(3) . ' AND ' .
+					$db->quoteName('parent_id') . ' IN (' . implode(',', $ids) . ')))');
 			$db->setQuery($query);
 			$tags = $db->loadObjectList('id');
 

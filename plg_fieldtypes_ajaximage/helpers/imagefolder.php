@@ -207,6 +207,14 @@ class imageFolderHelper
 	{
 		if (!empty($pk) && !empty($table) && !empty($column))
 		{
+			$db    = Factory::getDbo();
+			$query = $db->getQuery(true)
+				->select('id')
+				->from($table)
+				->where('id = ' . $pk);
+			$db->setQuery($query);
+			$exist = (!empty($db->loadResult()));
+
 			if (is_array($value))
 			{
 				$registry = new Registry($value);
@@ -217,7 +225,8 @@ class imageFolderHelper
 			$update->id      = $pk;
 			$update->$column = $value;
 
-			return Factory::getDbo()->updateObject($table, $update, 'id');
+			return ($exist) ? $db->updateObject($table, $update, 'id') :
+				$db->insertObject($table, $update);
 		}
 
 		return false;

@@ -2,12 +2,12 @@
 <extension version="3.8" type="plugin" group="fieldtypes" method="upgrade">
 	<name>PLG_FIELDTYPES_AJAXALIAS</name>
 	<author>Nerudas</author>
-	<creationDate>May 2018</creationDate>
+	<creationDate>June 2018</creationDate>
 	<copyright>Copyright (c) 2015 - 2018 Nerudas. All rights reserved.</copyright>
 	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
 	<authorUrl>nerudas.ru</authorUrl>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<description>PLG_FIELDTYPES_AJAXALIAS_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<languages folder="language">

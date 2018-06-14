@@ -141,11 +141,21 @@
 					placemark.options.set(options);
 				});
 
+
 				// If has palcemark value
+				var hasValue = false;
 				if ($('#' + id + '_placemark_coordinates').val() !== '') {
 					var coordinates = $.parseJSON($('#' + id + '_placemark_coordinates').val());
 					map.geoObjects.add(placemark);
 					placemark.geometry.setCoordinates(coordinates);
+					hasValue = true;
+				}
+				// If set placemark
+				if (!hasValue && fieldParams.setplacemark) {
+					var coordinates = map.getCenter();
+					map.geoObjects.add(placemark);
+					placemark.geometry.setCoordinates(coordinates);
+					setplacemarkValue(coordinates);
 				}
 
 				// On click map

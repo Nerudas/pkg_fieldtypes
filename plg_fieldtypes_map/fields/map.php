@@ -42,6 +42,15 @@ class JFormFieldMap extends FormField
 	 */
 	protected $placemarkurl = '';
 
+	/**
+	 * Set placemark after render
+	 *
+	 * @var    bool
+	 *
+	 * @since  1.0.0
+	 */
+	protected $setplacemark;
+
 
 	/**
 	 * Method to attach a JForm object to the field.
@@ -65,6 +74,8 @@ class JFormFieldMap extends FormField
 		{
 			$this->layout       = (!empty($this->element['layout'])) ? (string) $this->element['layout'] : $this->layout;
 			$this->placemarkurl = (!empty($this->element['placemarkurl'])) ? (string) $this->element['placemarkurl'] : $this->layout;
+			$this->setplacemark = (!empty($this->element['setplacemark']) &&
+				((string) $this->element['setplacemark'] == 'true') || (string) $this->element['setplacemark'] == 1);
 		}
 
 		if (empty($this->value))
@@ -126,6 +137,7 @@ class JFormFieldMap extends FormField
 		$params['center']       = array($params['latitude'], $params['longitude']);
 		$params['zoom']         = ($region) ? $region->zoom : 6;
 		$params['placemarkurl'] = (!empty($this->placemarkurl)) ? $this->placemarkurl : '';
+		$params['setplacemark'] = (!empty($this->setplacemark)) ? $this->setplacemark : '';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);
 

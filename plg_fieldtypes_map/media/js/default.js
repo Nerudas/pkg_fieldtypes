@@ -150,7 +150,8 @@
 					placemark.geometry.setCoordinates(coordinates);
 					hasValue = true;
 				}
-				// If set placemark
+
+				// If set placemark option
 				if (!hasValue && fieldParams.setplacemark) {
 					var coordinates = map.getCenter();
 					map.geoObjects.add(placemark);

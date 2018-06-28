@@ -43,6 +43,7 @@
 					type: 'POST',
 					dataType: 'json',
 					url: checkurl,
+					cache: false,
 					data: data,
 					beforeSend: function () {
 						$(loading).show();

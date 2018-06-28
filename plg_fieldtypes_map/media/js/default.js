@@ -106,6 +106,7 @@
 							type: 'POST',
 							dataType: 'json',
 							url: placemarkURL,
+							cache: false,
 							data: data,
 							global: false,
 							async: false,

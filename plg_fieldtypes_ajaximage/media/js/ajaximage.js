@@ -71,41 +71,6 @@
 
 			// Multiple actions
 			if (multiple) {
-				//Check results images exist
-				var items = $(result).find('.item').toArray();
-
-				if (items.length > 0) {
-					var i = 0,
-						total = items.length;
-
-					function checkImageExist() {
-						if (i < total) {
-							var item = items[i],
-								src = $(item).find('img').attr('src');
-							$.ajax({
-								url: src,
-								type: 'HEAD',
-								error: function () {
-									$(item).remove();
-								},
-								complete: function () {
-									checkImageExist();
-								}
-							});
-
-							i++
-						}
-						else {
-							reIndex();
-							saveField();
-							checkLimit();
-						}
-
-					}
-
-					checkImageExist();
-				}
-
 				// Check on page load
 				checkLimit();
 
@@ -127,6 +92,7 @@
 						global: false,
 						async: false,
 						url: removeurl,
+						cache: false,
 						data: {'src': src},
 						success: function (response) {
 							var data = response.data[0];
@@ -175,25 +141,6 @@
 			}
 			// Simple Actions
 			else {
-				//Check result image exist
-				if (result.val() !== '') {
-					var src = $(field).find('img').attr('src');
-					$.ajax({
-						url: src,
-						type: 'HEAD',
-						error: function () {
-							result.val('');
-							saveField();
-							if (noimage !== '') {
-								$(field).find('img').attr('src', noimage);
-							}
-							else {
-								$(field).find('img').attr('src', '');
-							}
-						}
-					});
-				}
-
 				$('body').on('click', field.selector + ' .remove', function () {
 					form.addClass('disable');
 					var item = $(this).parents('.item');
@@ -204,6 +151,7 @@
 						global: false,
 						async: false,
 						url: removeurl,
+						cache: false,
 						data: {'src': src},
 						success: function (response) {
 							var data = response.data[0];
@@ -315,6 +263,7 @@
 									processData: false,
 									contentType: false,
 									url: uploadurl,
+									cache: false,
 									data: ajaxData,
 									success: function (response) {
 										var data = response.data[0];
@@ -417,6 +366,7 @@
 					global: false,
 					async: false,
 					url: saveurl,
+					cache: false,
 					data: ajaxData,
 					success: function (response) {
 						if (multiple) {

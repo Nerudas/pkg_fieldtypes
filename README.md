@@ -32,8 +32,5 @@ Add Multiple phone field type
 * **Field Types - Price Plugin**  
 Add Price field type
 
-* **Field Types - Regions Plugin**  
-Add Regions field type
-
 * **Field Types - Social Plugin**  
 Add Social field type

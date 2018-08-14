@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 class JFormFieldMap extends FormField
 {
@@ -153,10 +154,10 @@ class JFormFieldMap extends FormField
 	 */
 	protected function getRegionData()
 	{
-		JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_nerudas/models');
-		$regionModel = JModelLegacy::getInstance('regions', 'NerudasModel');
+		BaseDatabaseModel::addIncludePath(JPATH_SITE . '/components/com_location/models', 'LocationModel');
+		$regionsModel = BaseDatabaseModel::getInstance('Regions', 'LocationModel', array('ignore_request' => false));
 
-		$region = $regionModel->getRegion(Factory::getApplication()->input->cookie->get('region'));
+		$region = $regionsModel->getVisitorRegion();
 
 		return ($region) ? $region : false;
 	}

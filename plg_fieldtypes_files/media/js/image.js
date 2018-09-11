@@ -156,7 +156,6 @@
 					beforeSend: function () {
 						$(image).attr('src', '');
 						$(loading).show();
-
 					},
 					complete: function () {
 						$(loading).hide();

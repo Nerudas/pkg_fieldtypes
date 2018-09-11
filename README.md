@@ -34,3 +34,6 @@ Add Price field type
 
 * **Field Types - Social Plugin**  
 Add Social field type
+
+* **Field Types - Files**  
+Add Files field

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="plugin" group="fieldtypes" method="upgrade">
+	<name>PLG_FIELDTYPES_FILES</name>
+	<author>Nerudas</author>
+	<creationDate>September 2018</creationDate>
+	<copyright>Copyright (c) 2015 - 2018 Nerudas. All rights reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>support@nerudas.ru</authorEmail>
+	<authorUrl>nerudas.ru</authorUrl>
+	<version>1.1.0</version>
+	<description>PLG_FIELDTYPES_FILES_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_fieldtypes_files.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_fieldtypes_files.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_fieldtypes_files.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.plg_fieldtypes_files.sys.ini</language>
+	</languages>
+	<files>
+		<filename plugin="files">files.php</filename>
+		<filename>helper.php</filename>
+		<folder>fields</folder>
+		<folder>layouts</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			</fieldset>
+		</fields>
+	</config>
+	<media destination="plg_fieldtypes_files" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+	</media>
+</extension>

@@ -7,3 +7,83 @@
  * @link       https://nerudas.ru
  */
 
+[data-input-image] {
+	width: 206px;
+	min-width: 206px;
+	max-width: 100%;
+}
+
+[data-input-image] .form {
+	display: flex;
+	position: relative;
+	width: 100%;
+	min-height: 157px;
+	padding: 10px;
+	border: 1px dashed #999;
+	background-color: #fafbfc;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+}
+
+[data-input-image] .form > label {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+[data-input-image] .form input[type="file"] {
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+[data-input-image] .form img {
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+[data-input-image] .form .actions {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 1;
+}
+
+[data-input-image] .form .actions > * {
+	font-size: 16px;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+[data-input-image] .form .actions > *:hover {
+	text-decoration: none;
+}
+
+[data-input-image] .form .loading {
+	display: none;
+	background: rgba(255, 255, 255, .8) url('/media/jui/images/ajax-loader.gif') 50% 50% no-repeat;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.8;
+	overflow: hidden;
+	z-index: 2;
+}
+
+[data-input-image] .form.dragend {
+	background-color: #ccc;
+	border-color: #1A3867;
+}
+
+[data-input-image] .form.dragend > * {
+	opacity: .3;
+}

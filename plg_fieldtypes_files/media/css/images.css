@@ -1,0 +1,153 @@
+/*
+ * @package    Field Types - Files Plugin
+ * @version    1.1.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+[data-input-images] {
+	width: 100%;
+	max-width: 1200px;
+}
+
+[data-input-images] .form {
+	display: flex;
+	position: relative;
+	width: 100%;
+	min-height: 157px;
+	padding: 10px;
+	border: 1px dashed #999;
+	background-color: #fafbfc;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+}
+
+[data-input-images] .form > label {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+[data-input-images] .form input[type="file"] {
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+[data-input-images] .form .text {
+	text-align: center;
+}
+
+[data-input-images] .form .text i {
+	font-size: 30px;
+	color: #ccc;
+	margin-bottom: 20px;
+}
+
+[data-input-images] .form .loading {
+	display: none;
+	background: rgba(255, 255, 255, .8) url('/media/jui/images/ajax-loader.gif') 50% 50% no-repeat;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.8;
+	overflow: hidden;
+	z-index: 2;
+}
+
+[data-input-images] .form.dragend {
+	background-color: #ccc;
+	border-color: #1A3867;
+}
+
+[data-input-images] .form.dragend > * {
+	opacity: .3;
+}
+
+[data-input-images] .result ul {
+	margin: 10px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+[data-input-images] .result ul > li {
+	position: relative;
+	margin-bottom: 10px;
+	background: #fcfcfc;
+	border: 1px solid #e5e5e5;
+}
+
+[data-input-images] .result ul > li .wrapper {
+	display: flex;
+	align-items: center;
+}
+
+[data-input-images] .result ul > li .icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	padding: 10px;
+	color: #222;
+	background: #FFF;
+	border-right: 1px solid #e5e5e5;
+}
+
+[data-input-images] .result ul > li.with-text .icon {
+	width: 115px;
+	height: 115px;
+}
+
+[data-input-images] .result ul > li .icon img {
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+[data-input-images] .result ul > li .icon:hover,
+[data-input-images] .result ul > li .icon:focus,
+[data-input-images] .result ul > li .icon:active {
+	text-decoration: none;
+}
+
+[data-input-images] .result ul > li .text {
+	flex: 1;
+	padding: 5px 10px;
+}
+
+[data-input-images] .result ul > li .text .lead {
+	margin-bottom: 10px;
+}
+
+[data-input-images] .result ul > li .text .description {
+	margin-top: 5px;
+}
+
+[data-input-images] .result ul > li .actions {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+[data-input-images] .result ul > li .actions > * {
+	cursor: pointer;
+}
+
+[data-input-images] .result ul > li .actions > *:hover {
+	text-decoration: none;
+}
+
+[data-input-images] .result.sortable .item:not(.ui-sortable-helper) {
+	opacity: 0.6;
+}

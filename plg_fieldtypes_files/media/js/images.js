@@ -9,32 +9,35 @@
 
 (function ($) {
 	$(document).ready(function () {
-		$('[data-input-image]').each(function () {
+		$('[data-input-images]').each(function () {
 			var field = $(this),
 				id = field.attr('id'),
+				filed_name = field.attr('data-name'),
 				form = field.find('.form'),
 				input = form.find('input[type="file"]'),
 				loading = form.find('.loading'),
-				image = form.find('img');
+				result = field.find('.result');
 
 			var params = Joomla.getOptions(id, ''),
 				folder_field = $('#' + params.folder_field),
-				folder = $(folder_field).val();
+				root_folder = $(folder_field).val(),
+				default_value = params.value,
+				text = params.text;
 
-			if (params.folder_field == '' || folder_field.length == 0 || folder == '') {
+			if (params.folder_field == '' || folder_field.length == 0 || root_folder == '') {
 				$(field).remove();
 			}
 			else {
 				setInterval(function () {
-					$(form).height(Math.round(($(field).width() / 4) * 3));
+					$(form).height(Math.round(($(field).width() / 10) * 2));
 				}, 10);
-				getImage();
+				getImages();
 			}
 
 			// Upload
 			input.on('change', function (e) {
 				if (!form.hasClass('disable')) {
-					uploadImage(e.target.files);
+					uploadImages(e.target.files);
 				}
 			});
 
@@ -55,24 +58,26 @@
 				})
 				.on('drop', function (e) {
 					if (!form.hasClass('disable')) {
-						uploadImage(e.originalEvent.dataTransfer.files);
+						console.log('bbb');
+						uploadImages(e.originalEvent.dataTransfer.files);
 					}
 
 				});
 
 			// Upload image function
-			function uploadImage(files) {
+			function uploadImages(files) {
 				var ajaxData = new FormData();
-				ajaxData.append('type', 'image');
-				ajaxData.append('folder', folder);
-				ajaxData.append('filename', params.filename);
-				ajaxData.append('noimage', params.noimage);
-				ajaxData.append('files[]', files[0]);
+				ajaxData.append('type', 'images');
+				ajaxData.append('root_folder', root_folder);
+				ajaxData.append('folder', params.folder);
+				$(files).each(function (i, file) {
+					ajaxData.append('files[]', file);
+				});
 
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFile',
+					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFiles',
 					processData: false,
 					contentType: false,
 					cache: false,
@@ -80,20 +85,11 @@
 					async: false,
 					data: ajaxData,
 					beforeSend: function () {
-						$(image).attr('src', '');
+						$(result).html('');
 						$(loading).show();
-
 					},
 					complete: function () {
-						$(loading).hide();
-					},
-					success: function (response) {
-						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
-						}
-						else {
-							$(image).attr('src', '');
-						}
+						getImages();
 					},
 					error: function (response) {
 						console.error(response.status + ': ' + response.statusText);
@@ -101,23 +97,39 @@
 				});
 			}
 
-			// Get image function
-			function getImage() {
+			// Get images function
+			function getImages() {
+				var value = default_value,
+					items = $(result).find('.item');
+				$(items).each(function (i, item) {
+					var key = $(item).attr('data-key'),
+						val = {};
+					if (text) {
+						val.text = $(item).find('[name*="[text]"]').val();
+					}
+					val.ordering = $(item).find('[name*="[ordering]"]').val();
+					value[key] = val;
+
+				});
+
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFile',
+					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFiles',
 					cache: false,
 					global: false,
 					async: false,
 					data: {
-						type: 'image',
-						folder: folder,
-						filename: params.filename,
-						noimage: params.noimage
+						type: 'images',
+						root_folder: root_folder,
+						folder: params.folder,
+						noimage: params.noimage,
+						value: value,
+						text: text,
+						filed_name: filed_name
 					},
 					beforeSend: function () {
-						$(image).attr('src', '');
+						$(result).html('');
 						$(loading).show();
 					},
 					complete: function () {
@@ -125,52 +137,56 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
+							$(result).html(response.data);
 						}
 						else {
-							$(image).attr('src', '');
+							$(result).html('');
 						}
 					},
 					error: function (response) {
+						$(result).html('');
 						console.error(response.status + ': ' + response.statusText);
 					}
 				});
 			}
 
-			// Remove image function
-			$(form).find('a.remove').on('click', function () {
+			// Delete images function
+			$('body').on('click', result.selector + ' .item .actions .remove', function () {
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFile',
+					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFiles',
 					cache: false,
 					global: false,
 					async: false,
 					data: {
-						type: 'image',
-						folder: folder,
-						filename: params.filename,
-						noimage: params.noimage
+						file: $(this).data('file')
 					},
 					beforeSend: function () {
-						$(image).attr('src', '');
+						$(result).html('');
 						$(loading).show();
 					},
 					complete: function () {
-						$(loading).hide();
-					},
-					success: function (response) {
-						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
-						}
-						else {
-							$(image).attr('src', '');
-						}
+						getImages();
 					},
 					error: function (response) {
 						console.error(response.status + ': ' + response.statusText);
 					}
 				});
+			});
+
+			// Move images function
+			$(result.selector + ' > ul').sortable({
+				handle: ".actions .move",
+				start: function (event, ui) {
+					result.addClass('sortable');
+				},
+				stop: function (event, ui) {
+					$(result).find('.item').each(function (i, item) {
+						$(item).find('[name*="[ordering]"]').val(i + 1);
+					});
+					result.removeClass('sortable');
+				}
 			});
 		});
 	});

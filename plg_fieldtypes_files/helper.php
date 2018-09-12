@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Filter\OutputFilter;
+use Joomla\Registry\Registry;
+use Joomla\Utilities\ArrayHelper;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -251,15 +253,21 @@ class FieldTypesFilesHelper
 	/**
 	 * Get Images
 	 *
-	 * @param string $folder      Images sub folder
-	 * @param string $root_folder Simple path to files (etc images/others)
+	 * @param string   $folder      Images sub folder
+	 * @param string   $root_folder Simple path to files (etc images/others)
+	 * @param array    $value       Exist images value
+	 * @param Registry $params      Parameters
 	 *
 	 * @return bool|string
 	 *
 	 * @since  1.1.0
 	 */
-	public function getImages($folder = '', $root_folder = '')
+	public function getImages($folder = '', $root_folder = '', $value = array(), $params = null)
 	{
+		if ($params == null)
+		{
+			$params = new Registry();
+		}
 		if (empty($folder) || empty($root_folder))
 		{
 			return '';
@@ -273,15 +281,43 @@ class FieldTypesFilesHelper
 		if (!empty($files))
 		{
 			$images = array();
+			$count  = count($value);
 			foreach ($files as $file)
 			{
 				if ($this->checkImage($file))
 				{
-					$images[] = $path . '/' . $file;
+					$val = (!empty($value[$file])) ? $value[$file] : false;
+
+					$image             = new stdClass();
+					$image->file       = $file;
+					$image->src        = $path . '/' . $file;
+					$image->text       = false;
+					$image->filed_name = $params->get('filed_name', 'jform[images_default]') . '[' . $file . ']';
+
+					if ($val && !empty($val['ordering']))
+					{
+						$image->ordering = $val['ordering'];
+					}
+					else
+					{
+						$image->ordering = $count + 1;
+						$count++;
+					}
+
+					if ($params->get('text', false))
+					{
+						$image->text = ($val && !empty($val['text'])) ? $val['text'] : '';
+					}
+
+					$images[$file] = $image;
 				}
 			}
+			if (!empty($images))
+			{
+				$images = ArrayHelper::sortObjects($images, 'ordering', 1);
+			}
 
-			return LayoutHelper::render('components.com_services.form.field.images.items', $images);
+			return LayoutHelper::render('joomla.form.field.files.images.items', $images);
 		}
 
 		return '';

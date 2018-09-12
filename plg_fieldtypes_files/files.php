@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Response\JsonResponse;
+use Joomla\Registry\Registry;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -113,6 +114,73 @@ class PlgFieldTypesFiles extends CMSPlugin
 		}
 
 		return $this->setResponse($response);
+	}
+
+	/**
+	 * Method to get Files
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return bool
+	 */
+	public function getFiles()
+	{
+		$app         = Factory::getApplication();
+		$folder      = $app->input->get('folder', '', 'raw');
+		$root_folder = $app->input->get('root_folder', '', 'raw');
+		$type        = $app->input->get('type', 'images');
+		$response    = false;
+		$helper      = new FieldTypesFilesHelper();
+
+		if ($type == 'images')
+		{
+			$value  = $app->input->get('value', array(), 'array');
+			$params = new Registry();
+			$params->set('text', $app->input->get('text', false));
+			$params->set('filed_name', $app->input->get('filed_name', 'jform[images_default]', 'raw'));
+			$response = $helper->getImages($folder, $root_folder, $value, $params);
+		}
+
+		return $this->setResponse($response);
+	}
+
+	/**
+	 * Method to upload files
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return bool
+	 */
+	public function uploadFiles()
+	{
+		$app         = Factory::getApplication();
+		$folder      = $app->input->get('folder', '', 'raw');
+		$root_folder = $app->input->get('root_folder', '', 'raw');
+		$type        = $app->input->get('type', 'images');
+		$files       = $app->input->files->get('files', array(), 'array');
+		$response    = false;
+		$helper      = new FieldTypesFilesHelper();
+		if ($type == 'images')
+		{
+			$response = $helper->uploadImages($folder, $root_folder, $files);
+		}
+
+		return $this->setResponse($response);
+	}
+
+	/**
+	 * Method to delete File in multiple fields
+	 *
+	 * @since  1.2.0
+	 *
+	 * @return bool
+	 */
+	public function deleteFiles()
+	{
+		$file   = Factory::getApplication()->input->get('file', '', 'raw');
+		$helper = new FieldTypesFilesHelper();
+
+		return $this->setResponse($helper->deleteFile($file));
 	}
 
 	/**

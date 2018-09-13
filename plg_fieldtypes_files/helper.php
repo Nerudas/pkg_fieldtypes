@@ -152,12 +152,13 @@ class FieldTypesFilesHelper
 	 * @param string $filename Filename
 	 * @param string $folder   Simple path to file (etc images/others)
 	 * @param string $noimage  Simple path to file (etc images/others)
+	 * @param bool   $version  Add version to src
 	 *
 	 * @return bool|string
 	 *
 	 * @since  1.1.0
 	 */
-	public function getImage($filename = '', $folder = '', $noimage = null)
+	public function getImage($filename = '', $folder = '', $noimage = null, $version = true)
 	{
 		if (empty($filename) || empty($folder))
 		{
@@ -172,7 +173,13 @@ class FieldTypesFilesHelper
 			{
 				if ($this->checkImage($file))
 				{
-					return $folder . '/' . $file . '?v=' . rand();
+					$src = $folder . '/' . $file;
+					if ($version)
+					{
+						$src .= '?v=' . rand();
+					}
+
+					return $src;
 				}
 			}
 		}

@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Response\JsonResponse;
-use Joomla\Registry\Registry;
 
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -134,10 +133,11 @@ class PlgFieldTypesFiles extends CMSPlugin
 
 		if ($type == 'images')
 		{
-			$value  = $app->input->get('value', array(), 'array');
-			$params = new Registry();
-			$params->set('text', $app->input->get('text', false));
-			$params->set('filed_name', $app->input->get('filed_name', 'jform[images_default]', 'raw'));
+			$value    = $app->input->get('value', array(), 'array');
+			$params   = array(
+				'text'       => $app->input->get('text', false),
+				'filed_name' => $app->input->get('filed_name', 'jform[images_default]', 'raw')
+			);
 			$response = $helper->getImages($folder, $root_folder, $value, $params);
 		}
 

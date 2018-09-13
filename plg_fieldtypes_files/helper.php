@@ -253,24 +253,22 @@ class FieldTypesFilesHelper
 	/**
 	 * Get Images
 	 *
-	 * @param string   $folder      Images sub folder
-	 * @param string   $root_folder Simple path to files (etc images/others)
-	 * @param array    $value       Exist images value
-	 * @param Registry $params      Parameters
+	 * @param string $folder      Images sub folder
+	 * @param string $root_folder Simple path to files (etc images/others)
+	 * @param array  $value       Exist images value
+	 * @param array  $params      Parameters
 	 *
-	 * @return bool|string
+	 * @return bool|array
 	 *
 	 * @since  1.1.0
 	 */
-	public function getImages($folder = '', $root_folder = '', $value = array(), $params = null)
+	public function getImages($folder = '', $root_folder = '', $value = array(), $params = array())
 	{
-		if ($params == null)
-		{
-			$params = new Registry();
-		}
+		$params = new Registry($params);
+
 		if (empty($folder) || empty($root_folder))
 		{
-			return '';
+			return array();
 		}
 
 		$path = $root_folder . '/' . $folder;
@@ -317,7 +315,8 @@ class FieldTypesFilesHelper
 				$images = ArrayHelper::sortObjects($images, 'ordering', 1);
 			}
 
-			return LayoutHelper::render('joomla.form.field.files.images.items', $images);
+			return ($params->get('for_field', true)) ?
+				LayoutHelper::render('joomla.form.field.files.images.items', $images) : $images;
 		}
 
 		return '';

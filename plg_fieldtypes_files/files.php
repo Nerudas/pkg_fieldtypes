@@ -133,9 +133,9 @@ class PlgFieldTypesFiles extends CMSPlugin
 
 		if ($type == 'images')
 		{
-			$value    = $app->input->get('value', array(), 'array');
-			$params   = array(
-				'text'       => $app->input->get('text', false),
+			$value  = $app->input->get('value', array(), 'array');
+			$params = array(
+				'text'       => ($app->input->get('text', 'false') == 'true'),
 				'filed_name' => $app->input->get('filed_name', 'jform[images_default]', 'raw')
 			);
 			$response = $helper->getImages($folder, $root_folder, $value, $params);

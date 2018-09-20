@@ -165,7 +165,9 @@ class FieldTypesFilesHelper
 			return $noimage;
 		}
 
-		$path  = JPATH_ROOT . '/' . $folder;
+		$this->checkFolder($folder);
+		$path = JPATH_ROOT . '/' . $folder;
+
 		$files = JFolder::files($path, $filename, false, false);
 		if (!empty($files))
 		{

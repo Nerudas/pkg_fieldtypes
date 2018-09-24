@@ -53,6 +53,16 @@ class JFormFieldImage extends FormField
 	protected $layout = 'joomla.form.field.files.image';
 
 	/**
+	 * Noimage file
+	 *
+	 * @var    string
+	 *
+	 * @since  1.1.3
+	 */
+	protected $noimage  = 'media/plg_fieldtypes_files/images/noimage.jpg';
+
+
+	/**
 	 * Method to attach a JForm object to the field.
 	 *
 	 * @param   SimpleXMLElement $element   The SimpleXMLElement object representing the `<field>` tag for the form field object.

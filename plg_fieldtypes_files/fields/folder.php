@@ -10,7 +10,10 @@
 
 defined('_JEXEC') or die;
 
-Joomla\CMS\Form\FormHelper::loadFieldClass('text');
+use Joomla\CMS\Factory;
+use Joomla\CMS\Form\FormHelper;
+
+FormHelper::loadFieldClass('text');
 
 class JFormFieldFolder extends JFormFieldText
 {
@@ -52,6 +55,12 @@ class JFormFieldFolder extends JFormFieldText
 			$pk     = $this->form->getValue('id');
 
 			$value = $helper->getItemFolder($pk, $root);
+		}
+
+		if (Factory::getApplication()->isSite())
+		{
+			$this->hidden = true;
+			$this->layout = 'joomla.form.field.hidden';
 		}
 
 		return parent::setup($element, $value, $group);

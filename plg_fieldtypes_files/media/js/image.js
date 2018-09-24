@@ -72,7 +72,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFile',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFile',
 					processData: false,
 					contentType: false,
 					cache: false,
@@ -89,7 +89,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
+							$(image).attr('src', params.site_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');
@@ -106,7 +106,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFile',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFile',
 					cache: false,
 					global: false,
 					async: false,
@@ -125,7 +125,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
+							$(image).attr('src', params.site_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');
@@ -142,7 +142,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFile',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFile',
 					cache: false,
 					global: false,
 					async: false,
@@ -161,7 +161,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + '/' + response.data);
+							$(image).attr('src', params.site_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');

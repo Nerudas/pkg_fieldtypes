@@ -77,7 +77,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFiles',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=uploadFiles',
 					processData: false,
 					contentType: false,
 					cache: false,
@@ -115,7 +115,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFiles',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=getFiles',
 					cache: false,
 					global: false,
 					async: false,
@@ -155,7 +155,7 @@
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
-					url: 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFiles',
+					url: params.site_root + 'index.php?option=com_ajax&plugin=files&group=fieldtypes&format=json&task=deleteFiles',
 					cache: false,
 					global: false,
 					async: false,

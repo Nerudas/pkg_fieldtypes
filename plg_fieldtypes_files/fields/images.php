@@ -129,7 +129,7 @@ class JFormFieldImages extends FormField
 		$params['folder']       = $this->folder;
 		$params['text']         = $this->text;
 		$params['value']        = $this->value;
-		$params['site_root']    = Uri::root(true);
+		$params['site_root']    = Uri::root(true) . '/';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);
 

@@ -1,6 +1,6 @@
 /*
  * @package    Field Types - Ajax Alias Plugin
- * @version    1.1.2
+ * @version    1.1.3
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html

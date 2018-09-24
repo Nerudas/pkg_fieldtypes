@@ -119,7 +119,7 @@ class JFormFieldImage extends FormField
 			$this->form->getField($this->folder_field)->id;
 		$params['noimage']      = (!empty($this->noimage)) ? $this->noimage : '';
 		$params['filename']     = $this->filename;
-		$params['site_root']    = Uri::root(true) . '/';
+		$params['site_root']    = trim(Uri::root(true), '/') . '/';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);
 

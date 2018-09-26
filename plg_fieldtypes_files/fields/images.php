@@ -56,6 +56,24 @@ class JFormFieldImages extends FormField
 	protected $text;
 
 	/**
+	 * unique name
+	 *
+	 * @var    bool
+	 *
+	 * @since  1.0.0
+	 */
+	protected $unique;
+
+	/**
+	 * Maximum images
+	 *
+	 * @var    int
+	 *
+	 * @since  1.0.0
+	 */
+	protected $limit;
+
+	/**
 	 * Name of the layout being used to render the field
 	 *
 	 * @var    string
@@ -87,6 +105,9 @@ class JFormFieldImages extends FormField
 			$this->folder_field = (!empty($this->element['folder_field'])) ? (string) $this->element['folder_field'] : '';
 			$this->text         = (!empty($this->element['text']) &&
 				((string) $this->element['text'] == 'true' || (string) $this->element['text'] == 1));
+			$this->unique       = (!empty($this->element['unique']) &&
+				((string) $this->element['unique'] == 'true') || (string) $this->element['unique'] == 1);
+			$this->limit        = (!empty($this->element['limit'])) ? (int) $this->element['limit'] : 0;
 		}
 
 		if (!is_array($this->value))
@@ -120,8 +141,9 @@ class JFormFieldImages extends FormField
 	 */
 	protected function getLayoutData()
 	{
-		$data         = parent::getLayoutData();
-		$data['text'] = $this->text;
+		$data          = parent::getLayoutData();
+		$data['text']  = $this->text;
+		$data['limit'] = $this->limit;
 
 		$params                 = array();
 		$params['folder_field'] = (empty($this->folder_field)) ? false :
@@ -129,6 +151,8 @@ class JFormFieldImages extends FormField
 		$params['folder']       = $this->folder;
 		$params['text']         = $this->text;
 		$params['value']        = $this->value;
+		$params['unique']       = $this->unique;
+		$params['limit']        = $this->limit;
 		$params['site_root']    = trim(Uri::root(true), '/') . '/';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);

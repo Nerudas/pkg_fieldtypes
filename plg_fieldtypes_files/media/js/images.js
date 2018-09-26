@@ -14,6 +14,7 @@
 				id = field.attr('id'),
 				filed_name = field.attr('data-name'),
 				form = field.find('.form'),
+				limitError = field.find('.limit-error'),
 				input = form.find('input[type="file"]'),
 				loading = form.find('.loading'),
 				result = field.find('.result');
@@ -22,7 +23,9 @@
 				folder_field = $('#' + params.folder_field),
 				root_folder = $(folder_field).val(),
 				default_value = params.value,
-				text = params.text;
+				text = params.text,
+				unique = params.unique,
+				limit = params.limit;
 
 			if (params.folder_field == '' || folder_field.length == 0 || root_folder == '') {
 				$(field).remove();
@@ -66,12 +69,20 @@
 
 			// Upload image function
 			function uploadImages(files) {
-				var ajaxData = new FormData();
+				var total = $(result).find('.item').length,
+					ajaxData = new FormData();
 				ajaxData.append('type', 'images');
 				ajaxData.append('root_folder', root_folder);
 				ajaxData.append('folder', params.folder);
+				ajaxData.append('limit', limit);
+				ajaxData.append('unique', unique);
+				ajaxData.append('exist', total);
+
 				$(files).each(function (i, file) {
-					ajaxData.append('files[]', file);
+					if (limit == 0 || total < limit) {
+						ajaxData.append('files[]', file);
+						total++;
+					}
 				});
 
 				$.ajax({
@@ -138,14 +149,17 @@
 					success: function (response) {
 						if (response.success) {
 							$(result).html(response.data);
+							checkLimit();
 						}
 						else {
 							$(result).html('');
+							checkLimit();
 						}
 					},
 					error: function (response) {
 						$(result).html('');
 						console.error(response.status + ': ' + response.statusText);
+						checkLimit();
 					}
 				});
 			}
@@ -188,6 +202,18 @@
 					result.removeClass('sortable');
 				}
 			});
+
+			// Check limit function
+			function checkLimit() {
+				if (limit == 0 || $(result).find('.item').length < limit) {
+					$(form).show();
+					$(limitError).hide();
+					return true;
+				}
+				$(form).hide();
+				$(limitError).show();
+				return true;
+			}
 		});
 	});
 })(jQuery);

@@ -34,5 +34,8 @@ HTMLHelper::_('jquery.ui', array('sortable'));
 			</div>
 		</div>
 	</div>
+	<div class="limit-error alert alert-danger">
+		<?php echo Text::sprintf('JGLOBAL_FIELD_IMAGES_LIMIT_ERROR', $limit); ?>
+	</div>
 	<div class="result"></div>
 </div>

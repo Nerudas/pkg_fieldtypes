@@ -338,40 +338,64 @@ class FieldTypesFilesHelper
 	 * @param string $folder      Filename
 	 * @param string $root_folder Simple path to file (etc images/others)
 	 * @param array  $files       Files array
+	 * @param array  $params      Parameters
 	 *
 	 * @return bool
 	 *
 	 * @since  1.1.0
 	 */
-	public function uploadImages($folder = '', $root_folder = '', $files = array())
+	public function uploadImages($folder = '', $root_folder = '', $files = array(), $params = array())
 	{
-		if (empty($folder) || empty($root_folder) || empty($files))
+		$params = new Registry($params);
+		$total  = $params->get('exist', 0);
+		$limit  = $params->get('limit', 0);
+
+		if (empty($folder) || empty($root_folder) || empty($files) || ($limit > 0 && $total >= $limit))
 		{
 			return false;
 		}
 
 		$path = $root_folder . '/' . $folder;
 		$this->checkFolder($path);
-
 		foreach ($files as $file)
 		{
-			if ($this->checkImage($file['name']))
+			if ($limit == 0 || $total < $limit)
 			{
-				$filename  = JFile::stripExt($file['name']);
-				$filename  = OutputFilter::stringURLSafe($filename);
-				$extension = JFile::getExt($file['name']);
-
-				$ik        = 1;
-				$checkName = $filename;
-				while (JFile::exists(JPATH_ROOT . '/' . $path . '/' . $checkName . '.' . $extension))
+				if ($this->checkImage($file['name']))
 				{
-					$checkName = $filename . '_' . $ik;
-					$ik++;
-				}
-				$filename = $checkName;
+					$filename  = JFile::stripExt($file['name']);
+					$filename  = OutputFilter::stringURLSafe($filename);
+					$extension = JFile::getExt($file['name']);
 
-				$dest = JPATH_ROOT . '/' . $path . '/' . $filename . '.' . $extension;
-				JFile::upload($file['tmp_name'], $dest, false, true);
+					if ($params->get('unique', false))
+					{
+						$checkName = uniqid();
+						while (JFile::exists(JPATH_ROOT . '/' . $path . '/' . $checkName . '.' . $extension))
+						{
+							$checkName = uniqid();
+						}
+
+						$filename = $checkName;
+					}
+					else
+					{
+						$ik        = 1;
+						$checkName = $filename;
+						while (JFile::exists(JPATH_ROOT . '/' . $path . '/' . $checkName . '.' . $extension))
+						{
+							$checkName = $filename . '_' . $ik;
+							$ik++;
+						}
+						$filename = $checkName;
+					}
+
+
+					$dest = JPATH_ROOT . '/' . $path . '/' . $filename . '.' . $extension;
+					if (JFile::upload($file['tmp_name'], $dest, false, true))
+					{
+						$total++;
+					}
+				}
 			}
 		}
 

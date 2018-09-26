@@ -133,8 +133,8 @@ class PlgFieldTypesFiles extends CMSPlugin
 
 		if ($type == 'images')
 		{
-			$value  = $app->input->get('value', array(), 'array');
-			$params = array(
+			$value    = $app->input->get('value', array(), 'array');
+			$params   = array(
 				'text'       => ($app->input->get('text', 'false') == 'true'),
 				'filed_name' => $app->input->get('filed_name', 'jform[images_default]', 'raw')
 			);
@@ -162,7 +162,13 @@ class PlgFieldTypesFiles extends CMSPlugin
 		$helper      = new FieldTypesFilesHelper();
 		if ($type == 'images')
 		{
-			$response = $helper->uploadImages($folder, $root_folder, $files);
+			$params   = array(
+				'unique' => ($app->input->get('unique', 'false') == 'true'),
+				'limit'  => $app->input->get('limit', 0, 'int'),
+				'exist'  => $app->input->get('exist', 0, 'int'),
+			);
+
+			$response = $helper->uploadImages($folder, $root_folder, $files, $params);
 		}
 
 		return $this->setResponse($response);

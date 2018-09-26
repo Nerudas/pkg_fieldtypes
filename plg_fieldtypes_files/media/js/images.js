@@ -145,6 +145,19 @@
 					},
 					complete: function () {
 						$(loading).hide();
+						// Move images function
+						$(result.selector + ' > ul').sortable({
+							handle: ".actions .move",
+							start: function (event, ui) {
+								result.addClass('sortable');
+							},
+							stop: function (event, ui) {
+								$(result).find('.item').each(function (i, item) {
+									$(item).find('[name*="[ordering]"]').val(i + 1);
+								});
+								result.removeClass('sortable');
+							}
+						});
 					},
 					success: function (response) {
 						if (response.success) {
@@ -187,20 +200,6 @@
 						console.error(response.status + ': ' + response.statusText);
 					}
 				});
-			});
-
-			// Move images function
-			$(result.selector + ' > ul').sortable({
-				handle: ".actions .move",
-				start: function (event, ui) {
-					result.addClass('sortable');
-				},
-				stop: function (event, ui) {
-					$(result).find('.item').each(function (i, item) {
-						$(item).find('[name*="[ordering]"]').val(i + 1);
-					});
-					result.removeClass('sortable');
-				}
 			});
 
 			// Check limit function

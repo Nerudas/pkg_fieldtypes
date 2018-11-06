@@ -155,6 +155,7 @@ class JFormFieldImages extends FormField
 		$params['limit']        = $this->limit;
 		$params['site_root']    = trim(Uri::root(true), '/');
 		$params['site_root']    .= (Factory::getApplication()->isSite()) ? '/' : '/administrator/';
+		$params['image_root']   = trim(Uri::root(true), '/') . '/';
 
 		Factory::getDocument()->addScriptOptions($this->id, $params);
 

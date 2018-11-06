@@ -89,7 +89,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + response.data);
+							$(image).attr('src', params.image_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');
@@ -125,7 +125,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + response.data);
+							$(image).attr('src', params.image_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');
@@ -161,7 +161,7 @@
 					},
 					success: function (response) {
 						if (response.success) {
-							$(image).attr('src', params.site_root + response.data);
+							$(image).attr('src', params.image_root + response.data);
 						}
 						else {
 							$(image).attr('src', '');

@@ -65,4 +65,22 @@ class JFormFieldFolder extends JFormFieldText
 
 		return parent::setup($element, $value, $group);
 	}
+
+	/**
+	 * Method to get a control group with label and input.
+	 *
+	 * @param   array $options Options to be passed into the rendering of the field
+	 *
+	 * @return  string  A string containing the html for the control group
+	 *
+	 * @since   1.1.6
+	 */
+	public function renderField($options = array())
+	{
+		if (Factory::getApplication()->isSite())
+		{
+			$options['hiddenLabel'] = true;
+		}
+		return parent::renderField($options);
+	}
 }

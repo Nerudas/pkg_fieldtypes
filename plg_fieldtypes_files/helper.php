@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Field Types - Files Plugin
- * @version    1.1.6
+ * @version    1.1.7
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -145,6 +145,35 @@ class FieldTypesFilesHelper
 
 		return JFolder::move($old, $new);
 	}
+
+	/**
+	 * Copy item folder to temporary
+	 *
+	 * @param int    $pk   Item id
+	 * @param string $root Simple path to folder (etc images/others)
+	 *
+	 * @return string|bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function copyItemFolder($pk = null, $root = '')
+	{
+		if (empty($root) || empty($pk))
+		{
+			return $root;
+		}
+		$src = $this->checkFolder($root . '/' . $pk);
+		$dest   = $root . '/tmp_' . uniqid();
+		$folder = JPATH_ROOT . '/' . $dest;
+		while (JFolder::exists($folder))
+		{
+			$dest   = $root . '/tmp_' . uniqid();
+			$folder = JPATH_ROOT . '/' . $root;
+		}
+		JFolder::copy(JPATH_ROOT . '/' . $src, JPATH_ROOT . '/' . $dest);
+		return $dest;
+	}
+
 
 	/**
 	 * Get Image
